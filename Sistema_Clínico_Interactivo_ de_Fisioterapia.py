@@ -1,28 +1,50 @@
-print("""Bienvenida al Sistema Clínico!!!
-      Por favor Selecciona una Opción:
-      1. Iniciar Sesión
-      2. Registrarse
-      3. Contraseña
-      4. Salir del sistema""")
-opcion = input("Ingrese el número de la opción que desea: ")
-if opcion == "1":
-    print("Iniciar Sesión")
-    while True:
-        usuario = input("Ingrese su nombre de usuario: ")
-        contraseña = input("Ingrese su contraseña: ")
-        if usuario == "Helen" and contraseña == "2001":
-             print("Inicio de sesión exitoso. Bienvenida, Helen!")
-             break
-        else: print("Usuario o contraseña incorrectos. Por favor, inténtelo de nuevo.")
-elif opcion == "2":
-    print("Registrarse")
-    nuevo_usuario = input("Ingrese un nombre de usuario para registrarse: ")
-    nueva_contraseña = input("Ingrese una contraseña para regístrarse: ")
-    print("Registro exitoso. Ahora puede iniciar sesión con su nuevo usuario. ")
-elif opcion == "3":
-    print("Recuperar Contraseña")
-    correo = input("Ingrese su correo electrónico para recuperar su contraseña: ")
-    print("Se ha envíado un enlace de recuperación a su correo electrónico. Por favor, revise su bandeja de entrada.")
-elif opcion == "4":
-    print("Saliendo del sistema. ¡Gracias por usar el Sistema Clínico, Hasta luego!")
-else: print("Opción no válida. Por favor, seleccione una opción del 1 al 4.")
+# Diccionario de usuarios registrados
+usuarios = {
+    "Helen": "2001"
+}
+
+while True:
+    print("""
+Bienvenida al Sistema Clínico!!!
+    Por favor Selecciona una Opción:
+    1. Iniciar Sesión
+    2. Registrarse
+    3. Recuperar Contraseña
+    4. Salir del sistema""")
+
+    opcion = input("Ingrese el número de la opción que desea: ")
+
+    if opcion == "1":
+        print("Iniciar Sesión")
+        while True:
+            nombre = input("Ingrese su nombre de usuario: ")
+            contrasena = input("Ingrese su contraseña: ")
+            # Verifica contra el diccionario, no hardcodeado
+            if nombre in usuarios and usuarios[nombre] == contrasena:
+                print(f"Inicio de sesión exitoso. ¡Bienvenida, {nombre}!")
+                break
+            else:
+                print("Usuario o contraseña incorrectos. Por favor, inténtelo de nuevo.")
+
+    elif opcion == "2":
+        print("Registrarse")
+        nuevo_usuario = input("Ingrese un nombre de usuario para registrarse: ")
+        if nuevo_usuario in usuarios:
+            print("Ese nombre de usuario ya existe. Por favor elija otro.")
+        else:
+            nueva_contrasena = input("Ingrese una contraseña para registrarse: ")
+            # Guarda el nuevo usuario en el diccionario
+            usuarios[nuevo_usuario] = nueva_contrasena
+            print(f"Registro exitoso. ¡Bienvenida, {nuevo_usuario}! Ya puede iniciar sesión.")
+
+    elif opcion == "3":
+        print("Recuperar Contraseña")
+        correo = input("Ingrese su correo electrónico para recuperar su contraseña: ")
+        print("Se ha enviado un enlace de recuperación a su correo electrónico.")
+
+    elif opcion == "4":
+        print("Saliendo del sistema. ¡Gracias por usar el Sistema Clínico, Hasta luego!")
+        break
+
+    else:
+        print("Opción no válida. Por favor, seleccione una opción del 1 al 4.")
