@@ -1,3 +1,5 @@
+citas_agendadas = ""
+cantidad_citas = 0
 # ------------- Bloque 1 ----------------
 # Diccionario de usuarios registrados
 usuarios = {
@@ -48,5 +50,43 @@ Bienvenida al Sistema Clínico!!!
         print("Saliendo del sistema. ¡Gracias por usar el Sistema Clínico, Hasta luego!")
         break
 
+    else:
+        print("Opción no válida. Por favor, seleccione una opción del 1 al 4.")
+
+# ------------- Bloque 2 ----------------
+while True:
+    print("""Menú Principal del Sistema Clínico
+    1. Agendar Cita
+    2. Ver Citas Agendadas
+    3. Cancelar Cita
+    4. Salir""") 
+    opcion = input("Ingrese el número de la opción que desea: ").strip()
+    if opcion == "1":
+        print("Agendar Cita")
+        fecha = input("Ingrese la fecha de la cita (DD/MM/AAAA): ").strip()
+        hora = input("Ingrese la hora de la cita (HH:MM): ").strip()
+        # Guardar la cita en la lista
+        citas_agendadas += f"{fecha} a las {hora}\n"
+        cantidad_citas += 1
+        print(f"Cita agendada para el {fecha} a las {hora}.")
+    elif opcion == "2":
+        print("Ver Citas Agendadas")
+        # Verificar si hay citas agendadas
+        if citas_agendadas == "":
+            print("No hay citas agendadas.")
+        else:
+            print("Total de citas:", cantidad_citas)
+            print(citas_agendadas)    
+    elif opcion == "3":
+        print("Cancelar Cita")
+        fecha = input("Ingrese la fecha de la cita a cancelar (DD/MM/AAAA): ").strip()
+        hora = input("Ingrese la hora de la cita a cancelar (HH:MM): ").strip()
+        cita_a_borrar = fecha + " a las " + hora 
+        citas_agendadas = citas_agendadas.replace(cita_a_borrar, "")
+        cantidad_citas = cantidad_citas - 1
+        print(f"Cita del {fecha} a las {hora} cancelada.")
+    elif opcion == "4":
+        print("Saliendo del sistema. ¡Gracias por usar el Sistema Clínico, Hasta luego!")
+        break
     else:
         print("Opción no válida. Por favor, seleccione una opción del 1 al 4.")
